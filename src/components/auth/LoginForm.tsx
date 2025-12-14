@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { signIn, useSession } from '@/lib/auth/client';
 import { Button } from '@/components/ui/button';
@@ -14,10 +14,12 @@ export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const hasRedirected = useRef(false);
 
   useEffect(() => {
-    if (session && !isPending) {
-      window.location.href = '/dashboard';
+    if (session && !isPending && !hasRedirected.current) {
+      hasRedirected.current = true;
+      window.location.replace('/dashboard');
     }
   }, [session, isPending]);
 

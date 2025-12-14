@@ -6,7 +6,10 @@ export function middleware(request: NextRequest) {
 
   const hasSessionCookie = request.cookies
     .getAll()
-    .some((cookie) => cookie.name.startsWith('better-auth'));
+    .some((cookie) => 
+      cookie.name.includes('better-auth') || 
+      cookie.name.includes('better_auth')
+    );
 
   const isAuthRoute = pathname.startsWith('/login') || pathname.startsWith('/register');
   const isProtectedRoute = pathname.startsWith('/dashboard');

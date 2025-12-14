@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, startTransition } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import Link from 'next/link';
 import { signUp } from '@/lib/auth/client';
 import { Button } from '@/components/ui/button';
@@ -11,7 +10,6 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { toast } from 'sonner';
 
 export function RegisterForm() {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -36,12 +34,9 @@ export function RegisterForm() {
 
       toast.success('Conta criada com sucesso');
       
-      await new Promise((resolve) => setTimeout(resolve, 300));
+      await new Promise((resolve) => setTimeout(resolve, 500));
       
-      startTransition(() => {
-        router.refresh();
-        router.replace('/dashboard');
-      });
+      window.location.replace('/dashboard');
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Erro ao criar conta');
       setIsLoading(false);

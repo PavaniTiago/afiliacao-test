@@ -6,7 +6,9 @@ export async function getServerSession() {
     const allCookies = cookieStore.getAll();
 
     const hasSessionCookie = allCookies.some(
-      (cookie) => cookie.name.startsWith('better-auth')
+      (cookie) => 
+        cookie.name.includes('better-auth') || 
+        cookie.name.includes('better_auth')
     );
 
     if (!hasSessionCookie) {
@@ -17,7 +19,7 @@ export async function getServerSession() {
       session: true,
       cookies: allCookies,
     };
-  } catch (error) {
+  } catch {
     return null;
   }
 }
