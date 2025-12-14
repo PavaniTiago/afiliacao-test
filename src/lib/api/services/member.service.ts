@@ -46,4 +46,3 @@ export const memberService = {
     return apiClient.delete<{ message: string }>(`/api/members/${id}`);
   },
 };
-

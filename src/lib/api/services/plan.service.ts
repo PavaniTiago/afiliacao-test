@@ -32,4 +32,3 @@ export const planService = {
     return apiClient.delete<{ message: string }>(`/api/plans/${id}`);
   },
 };
-

@@ -46,4 +46,3 @@ export const affiliateService = {
     return apiClient.delete<{ message: string }>(`/api/affiliates/${id}`);
   },
 };
-
